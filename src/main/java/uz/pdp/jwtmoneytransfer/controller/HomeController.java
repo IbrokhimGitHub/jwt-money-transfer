@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @GetMapping
     public String getHomePage(){
+        System.out.println("kirdi");
         return "welcome to home page";
+
+
+
     }
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-    static long expireTime = 300_000; //5 daqiqa
+    static long expireTime = 300_000_000; //5 daqiqa
     static String secretKey = "TokenSecretString";
 
     public String tokenGenerator(String username) {

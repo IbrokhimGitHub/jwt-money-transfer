@@ -4,17 +4,31 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
+@Entity
 public class InCome {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer fromCardId;
-    private Integer toCardId;
+
+//    private Card fromCard;
+    private String fromCardNumber;
+
+//    private Integer toCardId;
+    @ManyToOne
+    private Card toCard;
     private Double amount;
     private Date date;
 
+    public InCome(String fromCardNumber, Card toCard, Double amount, Date date) {
+        this.fromCardNumber = fromCardNumber;
+        this.toCard = toCard;
+        this.amount = amount;
+        this.date = date;
+    }
 }

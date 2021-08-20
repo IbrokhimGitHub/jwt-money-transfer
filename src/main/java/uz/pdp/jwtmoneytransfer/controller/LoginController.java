@@ -17,21 +17,21 @@ import uz.pdp.jwtmoneytransfer.service.AuthorizationService;
 @RestController
 @RequestMapping("/api/auth")
 public class LoginController {
-    @Autowired
-    AuthorizationService authorizationService;
+
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
     JwtProvider jwtProvider;
-    @Autowired
-    AuthenticationManager authenticatidonManager;
 
-    @PostMapping("login")
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @PostMapping("/login")
     public HttpEntity<?> loginToSystem(@RequestBody LoginDto loginDto) {
         try {
-            Authentication authenticate = authenticatidonManager.authenticate(new UsernamePasswordAuthenticationToken(
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginDto.getUsername(),
                     loginDto.getPassword()
             ));
@@ -40,7 +40,7 @@ public class LoginController {
             System.out.println(token);
             return ResponseEntity.ok(token);
         }catch (BadCredentialsException e){
-            return ResponseEntity.status(401).body("went wrong");
+            return ResponseEntity.status(401).body("Something went wrong");
         }
     }
 }
