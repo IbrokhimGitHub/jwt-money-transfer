@@ -15,9 +15,9 @@ public class InCome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-//    private Card fromCard;
-    private String fromCardNumber;
+    @ManyToOne
+    private Card fromCard;
+//    private String fromCardNumber;
 
 //    private Integer toCardId;
     @ManyToOne
@@ -25,8 +25,8 @@ public class InCome {
     private Double amount;
     private Date date;
 
-    public InCome(String fromCardNumber, Card toCard, Double amount, Date date) {
-        this.fromCardNumber = fromCardNumber;
+    public InCome(Card fromCard, Card toCard, Double amount, Date date) {
+        this.fromCard = fromCard;
         this.toCard = toCard;
         this.amount = amount;
         this.date = date;

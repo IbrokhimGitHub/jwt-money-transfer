@@ -9,7 +9,7 @@ import uz.pdp.jwtmoneytransfer.entity.Card;
 import uz.pdp.jwtmoneytransfer.entity.InCome;
 import uz.pdp.jwtmoneytransfer.entity.OutGoing;
 import uz.pdp.jwtmoneytransfer.entity.Transfer;
-import uz.pdp.jwtmoneytransfer.repository.CardRepository;
+//import uz.pdp.jwtmoneytransfer.repository.CardRepository;
 import uz.pdp.jwtmoneytransfer.repository.TransferRepository;
 import uz.pdp.jwtmoneytransfer.securtity.JwtProvider;
 
@@ -20,8 +20,8 @@ import java.sql.Date;
 public class TransferService {
     @Autowired
     CardService cardService;
-    @Autowired
-    CardRepository cardRepository;
+//    @Autowired
+//    CardRepository cardRepository;
     @Autowired
     JwtProvider jwtProvider;
     @Autowired
@@ -48,13 +48,17 @@ private static double transferCommission =0.01;
                 cardService.editCard(inComingCard);
                 transferRepository.save(transfer);
                 incomingService.save(new InCome(
-                        outGoingCard.getCardNumber(),
+                        outGoingCard,
                         inComingCard,
                         transfer.getTransferAmount(),
                         new Date(System.currentTimeMillis())
                 ));
                 outGoingService.save(new OutGoing(
-                        outGoingCard,inComingCard.getCardNumber(),transfer.getTransferAmount(),new Date(System.currentTimeMillis()),transfer.getTransferAmount()*transferCommission)
+                        outGoingCard,
+                        inComingCard,
+                        transfer.getTransferAmount(),
+                        new Date(System.currentTimeMillis()),
+                        transfer.getTransferAmount()*transferCommission)
                 );
                 return true;
 

@@ -18,16 +18,16 @@ public class OutGoing {
     @ManyToOne
     private Card fromCard;
 
+    @ManyToOne
 
-//    private Integer fromCardId;
-    private String toCardNumber;
+    private Card toCard;
     private Double amount;
     private Date date;
     private Double commissionAmount;
 
-    public OutGoing(Card fromCard, String toCardNumber, Double amount, Date date, Double commissionAmount) {
+    public OutGoing(Card fromCard, Card toCard, Double amount, Date date, Double commissionAmount) {
         this.fromCard = fromCard;
-        this.toCardNumber = toCardNumber;
+        this.toCard = toCard;
         this.amount = amount;
         this.date = date;
         this.commissionAmount = commissionAmount;
